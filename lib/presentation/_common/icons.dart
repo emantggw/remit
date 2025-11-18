@@ -30,3 +30,6 @@ const kiContact = Icons.contact_page;
 const kiSettings = Icons.settings;
 const kiNotification = Icons.notifications;
 const kiProfile = Icons.person;
+const kiHome = Icons.home;
+const kiHistory = Icons.history;
+const kiExchange = Icons.swap_horiz;
