@@ -34,3 +34,5 @@ const kiHome = Icons.home;
 const kiHistory = Icons.history;
 const kiExchange = Icons.swap_horiz;
 const kiInfo = Icons.info;
+const kiLightMode = Icons.light_mode;
+const kiDarkMode = Icons.dark_mode;

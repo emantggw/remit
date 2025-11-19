@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:remit/core/entity/UserAccount.dart';
 import 'package:remit/presentation/_common/dimension.dart';
+import 'package:remit/presentation/_common/widgets/filtered_app_icon.dart';
 import 'package:remit/presentation/transactions/transaction.dart';
 import 'package:remit/presentation/_common/icons.dart';
 import 'package:remit/presentation/_common/widgets/app_bar_widget.dart';
 import 'package:remit/presentation/transactions/widgets/send_money_widget.dart';
 import 'package:remit/providers/auth_provider.dart';
+import 'package:remit/providers/theme_provider.dart';
 import 'package:remit/providers/wallet_provider.dart';
 
 class HomeTabView extends ConsumerStatefulWidget {
@@ -30,6 +32,17 @@ class _HomeTabViewState extends ConsumerState<HomeTabView> {
           automaticallyImplyLeading: false,
           actions: [
             GestureDetector(onTap: _onLogout, child: Icon(kiLogout)),
+            kdSpace.width,
+            GestureDetector(
+              onTap: () {
+                ref.read(themeProvider.notifier).toggleCurrentThme(context);
+              },
+              child: Icon(
+                ref.watch(themeProvider).themeMode == ThemeMode.dark
+                    ? kiLightMode
+                    : kiDarkMode,
+              ),
+            ),
             kdSpace.width,
           ],
         ),
