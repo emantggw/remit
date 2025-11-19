@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:remit/core/entity/ResponseData.dart';
 import 'package:remit/core/entity/TransactionRecord.dart';
+import 'package:remit/core/entity/UserAccount.dart';
 import 'package:remit/core/interfaces/iwallet.repository.dart';
+import 'package:remit/presentation/_common/app_colors.dart';
 
 class FirebaseWalletRepository implements IWalletRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _walletsPath = 'wallets';
-  final String _exchangeRatesPath = 'exchange_rates';
+  final String _usersPath = "users";
 
   @override
   Future<ResponseData<double>> getBalance(String userId) async {
@@ -67,15 +70,27 @@ class FirebaseWalletRepository implements IWalletRepository {
   @override
   Future<ResponseData> sendMoney(
     String fromUserId,
-    String toUserId,
+    String toUserEmail,
     double amount,
     String currency, {
     String? note,
   }) async {
-    final fromRef = _firestore.collection(_walletsPath).doc(fromUserId);
-    final toRef = _firestore.collection(_walletsPath).doc(toUserId);
-
     try {
+      String toUserId = "";
+      ResponseData<UserAccount?> toUserAccountRes = await findUserByEmail(
+        toUserEmail,
+      );
+      if (!toUserAccountRes.isSuccessful || toUserAccountRes.data == null) {
+        return ResponseData(
+          isSuccessful: false,
+          errorMessages: ['User is not found by given email.'],
+        );
+      }
+      toUserId = toUserAccountRes.data?.uid ?? "";
+
+      final fromRef = _firestore.collection(_walletsPath).doc(fromUserId);
+      final toRef = _firestore.collection(_walletsPath).doc(toUserId);
+
       await _firestore.runTransaction((tx) async {
         final fromSnap = await tx.get(fromRef);
         final toSnap = await tx.get(toRef);
@@ -128,47 +143,37 @@ class FirebaseWalletRepository implements IWalletRepository {
   }
 
   @override
-  Future<ResponseData<double>> getExchangeRate(
-    String fromCurrency,
-    String toCurrency,
-  ) async {
+  Future<ResponseData> mint(String userId, double mintAmount) async {
     try {
-      if (fromCurrency.toUpperCase() == toCurrency.toUpperCase()) {
-        return ResponseData(isSuccessful: true, data: 1.0);
-      }
-
-      // Try reading exchange rate document: exchange_rates/{from}_{to}
-      final pairId =
-          '${fromCurrency.toUpperCase()}_${toCurrency.toUpperCase()}';
-      final doc = await _firestore
-          .collection(_exchangeRatesPath)
-          .doc(pairId)
-          .get();
-      if (doc.exists) {
-        final data = doc.data()!;
-        final rate = (data['rate'] ?? 0).toDouble();
-        return ResponseData(isSuccessful: true, data: rate);
-      }
-
-      // Fallback: simple hardcoded common rates (for disconnected/demo use)
-      const fallback = {
-        'USD_EUR': 0.92,
-        'EUR_USD': 1.09,
-        'USD_GHS': 12.0,
-        'GHS_USD': 0.083,
-      };
-
-      final fallbackRate = fallback[pairId];
-      if (fallbackRate != null) {
-        return ResponseData(isSuccessful: true, data: fallbackRate);
-      }
-
-      return ResponseData(
-        isSuccessful: false,
-        errorMessages: ['Rate not available'],
+      await _firestore.collection(_walletsPath).doc(userId).set({
+        "balance": mintAmount,
+      });
+      Fluttertoast.showToast(
+        msg: "You've got $mintAmount",
+        backgroundColor: kcGreen,
       );
+      return ResponseData(isSuccessful: true);
     } catch (e) {
-      return ResponseData(isSuccessful: false, errorMessages: [e.toString()]);
+      //
     }
+    return ResponseData(isSuccessful: false);
+  }
+
+  @override
+  Future<ResponseData<UserAccount?>> findUserByEmail(String email) async {
+    try {
+      var res = await _firestore
+          .collection(_usersPath)
+          .where("email", isEqualTo: email)
+          .get();
+      if (res.docs.isNotEmpty) {
+        dynamic data = res.docs.first.data();
+        UserAccount account = UserAccount.fromJson(data);
+        return ResponseData(isSuccessful: true, data: account);
+      }
+    } catch (e) {
+      //
+    }
+    return ResponseData(isSuccessful: false);
   }
 }

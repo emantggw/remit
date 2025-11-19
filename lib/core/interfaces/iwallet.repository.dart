@@ -1,7 +1,14 @@
 import 'package:remit/core/entity/ResponseData.dart';
 import 'package:remit/core/entity/TransactionRecord.dart';
+import 'package:remit/core/entity/UserAccount.dart';
 
 abstract class IWalletRepository {
+  /// minting the init balance
+  Future<ResponseData> mint(String userId, double amount);
+
+  ///
+  Future<ResponseData<UserAccount?>> findUserByEmail(String email);
+
   /// Get current wallet balance for a user. Returns ResponseData with a double value.
   Future<ResponseData<double>> getBalance(String userId);
 
@@ -19,16 +26,9 @@ abstract class IWalletRepository {
   /// Returns ResponseData indicating success/failure.
   Future<ResponseData> sendMoney(
     String fromUserId,
-    String toUserId,
+    String toUserEmail,
     double amount,
     String currency, {
     String? note,
   });
-
-  /// Get exchange rate for converting fromCurrency -> toCurrency.
-  /// Returns ResponseData with rate (double).
-  Future<ResponseData<double>> getExchangeRate(
-    String fromCurrency,
-    String toCurrency,
-  );
 }
