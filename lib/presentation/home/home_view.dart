@@ -8,8 +8,8 @@ import 'package:remit/presentation/exchangeRates/exchange_rates.dart';
 import 'package:remit/presentation/home/home_tab_view.dart';
 import 'package:remit/presentation/profile/profile.dart';
 import 'package:remit/presentation/transactions/transaction.dart';
-import 'package:remit/providers/auth_provider.dart';
-import 'package:remit/providers/wallet_provider.dart';
+import 'package:remit/presentation/_providers/auth_provider.dart';
+import 'package:remit/presentation/_providers/wallet_provider.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});

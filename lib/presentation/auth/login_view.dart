@@ -11,7 +11,7 @@ import 'package:remit/presentation/_common/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:remit/providers/auth_provider.dart';
+import 'package:remit/presentation/_providers/auth_provider.dart';
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});

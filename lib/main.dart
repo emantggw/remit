@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:remit/presentation/auth/signup_view.dart';
 import 'package:remit/presentation/home/home_view.dart';
-import 'package:remit/providers/theme_provider.dart';
+import 'package:remit/presentation/_providers/theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'presentation/auth/login_view.dart';
 import 'presentation/startup/startup_view.dart';

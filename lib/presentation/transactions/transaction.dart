@@ -7,8 +7,8 @@ import 'package:remit/presentation/_common/dimension.dart';
 import 'package:remit/presentation/_common/font.dart';
 import 'package:remit/presentation/_common/widgets/loading_indicator.dart';
 import 'package:remit/presentation/transactions/widgets/transaction_tile_widget.dart';
-import 'package:remit/providers/auth_provider.dart';
-import 'package:remit/providers/wallet_provider.dart';
+import 'package:remit/presentation/_providers/auth_provider.dart';
+import 'package:remit/presentation/_providers/wallet_provider.dart';
 
 class TransactionView extends ConsumerStatefulWidget {
   const TransactionView({super.key});

@@ -7,7 +7,7 @@ import 'package:remit/presentation/_common/font.dart';
 import 'package:remit/presentation/_common/widgets/app_bar_widget.dart';
 import 'package:remit/presentation/_common/widgets/loading_indicator.dart';
 import 'package:remit/presentation/_common/widgets/text_field_widget.dart';
-import 'package:remit/providers/exchange_provider.dart';
+import 'package:remit/presentation/_providers/exchange_provider.dart';
 
 class ExchangeRateView extends ConsumerStatefulWidget {
   const ExchangeRateView({super.key});

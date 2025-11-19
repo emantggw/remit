@@ -9,7 +9,7 @@ import 'package:remit/presentation/_common/widgets/auth_button.dart';
 import 'package:remit/presentation/_common/widgets/error_message_widget.dart';
 import 'package:remit/presentation/_common/widgets/text_field_widget.dart'
     show TextFieldWidget;
-import 'package:remit/providers/auth_provider.dart';
+import 'package:remit/presentation/_providers/auth_provider.dart';
 
 class SignupView extends ConsumerStatefulWidget {
   const SignupView({super.key});

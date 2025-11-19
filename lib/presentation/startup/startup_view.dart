@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remit/presentation/_common/widgets/loading_indicator.dart';
 
-import '../../providers/auth_provider.dart';
+import '../_providers/auth_provider.dart';
 
 class StartupView extends ConsumerStatefulWidget {
   const StartupView({super.key});
