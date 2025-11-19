@@ -20,6 +20,7 @@ class FirebaseAuthRepository implements IAuthRepository {
           .get();
       if (docSnapshot.exists) {
         dynamic data = docSnapshot.data();
+        data["uid"] = user.uid;
         UserAccount account = UserAccount.fromJson(data);
         //sync lastupdated at
         _firestore

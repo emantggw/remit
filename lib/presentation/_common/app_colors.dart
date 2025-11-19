@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const kcGreen = Color.fromARGB(255, 38, 188, 135);
+const kcGreen = Colors.green;
 const kcRed = Colors.red;
 const kcDarkRed = Color.fromARGB(255, 106, 10, 4);
 var kcDarkBlue = Colors.blue.shade900;
@@ -31,9 +31,9 @@ Color kcSecondary(BuildContext context) =>
 Color kcTertiary(BuildContext context) =>
     Theme.of(context).colorScheme.tertiary;
 Color kcBackground(BuildContext context) =>
-    Theme.of(context).colorScheme.background;
+    Theme.of(context).colorScheme.surface;
 Color kcOnBackground(BuildContext context) =>
-    Theme.of(context).colorScheme.onBackground;
+    Theme.of(context).colorScheme.onSurface;
 Color kcSurfaceTint(BuildContext context) =>
     Theme.of(context).colorScheme.surfaceTint;
 Color kcPrimaryContainer(BuildContext context) =>
@@ -54,18 +54,18 @@ Color kcHint(BuildContext context) => Theme.of(context).hintColor;
 Color kcError(BuildContext context) => Theme.of(context).colorScheme.error;
 
 Color kcGreyish(BuildContext context) =>
-    Theme.of(context).colorScheme.onBackground.withOpacity(0.8);
+    Theme.of(context).colorScheme.onSurface.withOpacity(0.8);
 
 Color kcLightGreyish(BuildContext context) =>
-    Theme.of(context).colorScheme.onBackground.withOpacity(0.65);
+    Theme.of(context).colorScheme.onSurface.withOpacity(0.65);
 Color kcVeryLightGreyish(BuildContext context) =>
-    Theme.of(context).colorScheme.onBackground.withOpacity(0.2);
+    Theme.of(context).colorScheme.onSurface.withOpacity(0.2);
 
 Color kcXVeryLightGreyish(BuildContext context) =>
-    Theme.of(context).colorScheme.onBackground.withOpacity(0.1);
+    Theme.of(context).colorScheme.onSurface.withOpacity(0.1);
 
 Color kcXXVeryLightGreyish(BuildContext context) =>
-    Theme.of(context).colorScheme.onBackground.withOpacity(0.065);
+    Theme.of(context).colorScheme.onSurface.withOpacity(0.065);
 
 Color kcHighlightBackground(BuildContext context) =>
     kcBackground(context).withOpacity(0.8);
